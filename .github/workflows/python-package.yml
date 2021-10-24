@@ -42,4 +42,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: dev.v1.20211013.2339
+        tags: dev.v1.20211024.1052
