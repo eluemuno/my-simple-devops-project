@@ -13,8 +13,8 @@ jobs:
     
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
-        platforms: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: [3.7]
+        platforms: [ubuntu-latest]
     runs-on:  ${{ matrix.platforms }}
     steps:
     - uses: actions/checkout@v2
@@ -29,3 +29,12 @@ jobs:
     - name: Test with pytest
       run: |
         pytest test.py
+    - name: Confirm Docker is installed 
+      run: docker run hello-world
+    - name: push image to docker hub
+      uses: docker/build-push-action@v2.4.0
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: docker push nnaemeka/learningdevops_flask
+        tag_with_ref: true
